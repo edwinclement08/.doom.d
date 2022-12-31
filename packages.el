@@ -49,3 +49,6 @@
 ;(unpin! t)
 
 (package! svg-tag-mode)
+
+(unpin! org-roam)
+(package! org-roam-ui)

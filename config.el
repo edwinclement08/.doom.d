@@ -285,7 +285,49 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
       )
 
 
+
 (map! :leader
       ":" #'projectile--find-file
       "SPC" #'execute-extended-command
       )
+
+;; (use-package eaf
+;;   :load-path "~/.emacs.d/site-lisp/emacs-application-framework/"
+;;   :custom
+;;   (eaf-browser-continue-where-left-off t)
+;;   (eaf-browser-enable-adblocker t)
+;;   (browse-url-browser-function 'eaf-open-browser))
+;; ;; (require 'eaf-image-viewer)
+;; ;; (require 'eaf-terminal)
+;; ;; (require 'eaf-video-player)
+;; ;; (require 'eaf-markdown-previewer)
+;; ;; (require 'eaf-org-previewer)
+;; ;; (require 'eaf-music-player)
+;; ;; (require 'eaf-file-manager)
+;; ;; (require 'eaf-rss-reader)
+;; ;;(require 'eaf-mindmap)
+;; ;; (require 'eaf-jupyter)
+;; ;; (require 'eaf-camera)
+;; ;; (require 'eaf-system-monitor)
+;; ;;(require 'eaf-netease-cloud-music)
+;; ;;(require 'eaf-file-browser)
+;; ;;(require 'eaf-file-sender)
+;; ;;(require 'eaf-airshare)
+;; ;;(require 'eaf-vue-demo)
+
+;;   (require 'eaf-pdf-viewer)
+;; (require 'eaf-demo)
+;;   (require 'eaf-browser)
+;; ;; If use Evil-mode Optional
+;; (require 'eaf-evil)
+;; (define-key key-translation-map (kbd "SPC")
+;;             (lambda (prompt)
+;;               (if (derived-mode-p 'eaf-mode)
+;;                   (pcase eaf--buffer-app-name
+;;                     ("browser" (if  (string= (eaf-call-sync "call_function" eaf--buffer-id "is_focus") "True")
+;;                                    (kbd "SPC")
+;;                                  (kbd eaf-evil-leader-key)))
+;;                     ("pdf-viewer" (kbd eaf-evil-leader-key))
+;;                     ("image-viewer" (kbd eaf-evil-leader-key))
+;;                     (_  (kbd "SPC")))
+;;                 (kbd "SPC"))))

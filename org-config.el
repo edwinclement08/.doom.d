@@ -33,11 +33,9 @@
     [remap evil-quit] #'org-capture-kill)
   )
 
-(defvar vulpea-capture-inbox-file
-  (format "%sinbox-%s.org" org-directory (system-name))
-  "The path to the inbox file.
+(setq vulpea-capture-inbox-file
+  (format "%sinbox-%s.org" org-directory (system-name)))
 
-It is relative to `org-directory', unless it is absolute.")
 
 (setq org-capture-templates
       '(("t" "todo" plain (file vulpea-capture-inbox-file)

@@ -80,6 +80,8 @@
 
 (load! "./org-config.el")
 (load! "./org-roam-config.el")
+(load! "./bindings.el")
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; SVG TAG ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -115,86 +117,24 @@
   )
 
 (after! (treemacs winum)
-    (setq winum-ignored-buffers-regexp
-          (delete (regexp-quote (format "%sFramebuffer-" treemacs--buffer-name-prefix))
-                  winum-ignored-buffers-regexp)))
+  (setq winum-ignored-buffers-regexp
+        (delete
+         (regexp-quote (format "%sScoped-Buffer-" treemacs--buffer-name-prefix))
+         winum-ignored-buffers-regexp))
+  )
 
-
-
-
-(map! :leader
-      :prefix ("r" . "roam")
-      "f" #'org-roam-node-find
-      "i" #'org-roam-node-insert
-      "m" #'org-roam-buffer-toggle
-      "n" #'org-roam-capture
-      "u" #'org-roam-ui-open
-      )
-
-(map! :leader
-       (:prefix-map ("l" . "workspace")
-        :desc "Display tab bar"           "`" #'+workspace/display
-        :desc "Switch workspace"          "."   #'+workspace/switch-to
-        :desc "Switch to last workspace"  "TAB"   #'+workspace/other
-        :desc "New workspace"             "n"   #'+workspace/new
-        :desc "New named workspace"       "N"   #'+workspace/new-named
-        :desc "Load workspace from file"  "l"   #'+workspace/load
-        :desc "Save workspace to file"    "s"   #'+workspace/save
-        :desc "Delete session"            "x"   #'+workspace/kill-session
-        :desc "Delete this workspace"     "d"   #'+workspace/delete
-        :desc "Rename workspace"          "r"   #'+workspace/rename
-        :desc "Restore last session"      "R"   #'+workspace/restore-last-session
-        :desc "Next workspace"            "]"   #'+workspace/switch-right
-        :desc "Previous workspace"        "["   #'+workspace/switch-left
-        :desc "Switch to 1st workspace"   "1"   #'+workspace/switch-to-0
-        :desc "Switch to 2nd workspace"   "2"   #'+workspace/switch-to-1
-        :desc "Switch to 3rd workspace"   "3"   #'+workspace/switch-to-2
-        :desc "Switch to 4th workspace"   "4"   #'+workspace/switch-to-3
-        :desc "Switch to 5th workspace"   "5"   #'+workspace/switch-to-4
-        :desc "Switch to 6th workspace"   "6"   #'+workspace/switch-to-5
-        :desc "Switch to 7th workspace"   "7"   #'+workspace/switch-to-6
-        :desc "Switch to 8th workspace"   "8"   #'+workspace/switch-to-7
-        :desc "Switch to 9th workspace"   "9"   #'+workspace/switch-to-8
-        :desc "Switch to final workspace" "0"   #'+workspace/switch-to-final))
-
-(map! :leader
-      "TAB" #'evil-switch-to-windows-last-buffer
-      )
-
-
-
-(map! :leader
-      ":" #'projectile--find-file
-      "SPC" #'execute-extended-command
-      )
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;; EAF setup  ;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (use-package eaf
   :load-path "~/.emacs.d/site-lisp/emacs-application-framework/"
   :custom
   (eaf-browser-continue-where-left-off t)
   (eaf-browser-enable-adblocker t))
-;; (require 'eaf-image-viewer)
-;; (require 'eaf-terminal)
-;; (require 'eaf-video-player)
-;; (require 'eaf-markdown-previewer)
-;; (require 'eaf-org-previewer)
-;; (require 'eaf-music-player)
-;; (require 'eaf-file-manager)
-;; (require 'eaf-rss-reader)
-;;(require 'eaf-mindmap)
-;; (require 'eaf-jupyter)
-;; (require 'eaf-camera)
-;; (require 'eaf-system-monitor)
-;;(require 'eaf-netease-cloud-music)
-;;(require 'eaf-file-browser)
-;;(require 'eaf-file-sender)
-;;(require 'eaf-airshare)
-;;(require 'eaf-vue-demo)
 
-  (require 'eaf-pdf-viewer)
+(require 'eaf-pdf-viewer)
 (require 'eaf-demo)
-  (require 'eaf-browser)
-;; If use Evil-mode Optional
+(require 'eaf-browser)
 (require 'eaf-evil)
 
 (define-key key-translation-map (kbd "SPC")
@@ -208,3 +148,8 @@
             ("image-viewer" (kbd eaf-evil-leader-key))
             (_  (kbd "SPC")))
         (kbd "SPC"))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(use-package! hyperbole)

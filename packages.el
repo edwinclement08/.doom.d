@@ -54,5 +54,5 @@
 (package! org-roam-ui)
 
 
-;; Shine a light on cursor position on big movements
-(package! beacon)
+
+(package! hyperbole)

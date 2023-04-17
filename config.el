@@ -127,28 +127,28 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;; EAF setup  ;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package eaf
-  :load-path "~/.emacs.d/site-lisp/emacs-application-framework/"
-  :custom
-  (eaf-browser-continue-where-left-off t)
-  (eaf-browser-enable-adblocker t))
+;; (use-package eaf
+;;   :load-path "~/.emacs.d/site-lisp/emacs-application-framework/"
+;;   :custom
+;;   (eaf-browser-continue-where-left-off t)
+;;   (eaf-browser-enable-adblocker t))
 
-(require 'eaf-pdf-viewer)
-(require 'eaf-demo)
-(require 'eaf-browser)
-(require 'eaf-evil)
+;; (require 'eaf-pdf-viewer)
+;; (require 'eaf-demo)
+;; (require 'eaf-browser)
+;; (require 'eaf-evil)
 
-(define-key key-translation-map (kbd "SPC")
-    (lambda (prompt)
-      (if (derived-mode-p 'eaf-mode)
-          (pcase eaf--buffer-app-name
-            ("browser" (if (eaf-call-sync "execute_function" eaf--buffer-id "is_focus")
-                           (kbd "SPC")
-                         (kbd eaf-evil-leader-key)))
-            ("pdf-viewer" (kbd eaf-evil-leader-key))
-            ("image-viewer" (kbd eaf-evil-leader-key))
-            (_  (kbd "SPC")))
-        (kbd "SPC"))))
+;; (define-key key-translation-map (kbd "SPC")
+;;     (lambda (prompt)
+;;       (if (derived-mode-p 'eaf-mode)
+;;           (pcase eaf--buffer-app-name
+;;             ("browser" (if (eaf-call-sync "execute_function" eaf--buffer-id "is_focus")
+;;                            (kbd "SPC")
+;;                          (kbd eaf-evil-leader-key)))
+;;             ("pdf-viewer" (kbd eaf-evil-leader-key))
+;;             ("image-viewer" (kbd eaf-evil-leader-key))
+;;             (_  (kbd "SPC")))
+;;         (kbd "SPC"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 

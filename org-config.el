@@ -11,12 +11,10 @@
                          ))
 
 
-
-
 (after! (org)
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NOW(n)" "WAITING(w)" "|" "DONE(d)" "CANCELED(c)")))
-
+(setq org-log-done t)
   (setq org-id-track-globally t)
   (setq org-id-extra-files (directory-files-recursively org-roam-directory "\.org$"))
 
@@ -24,9 +22,18 @@
         '((vm . vm-visit-folder-other-frame)
           (vm-imap . vm-visit-imap-folder-other-frame)
           (gnus . org-gnus-no-new-news)
-          (file . find-file-other-window)
+          (file . find-file)
           (wl . wl-other-frame))
         )
+
+  ;; (setq org-link-frame-setup
+  ;;       '((vm . vm-visit-folder-other-frame)
+  ;;         (vm-imap . vm-visit-imap-folder-other-frame)
+  ;;         (gnus . org-gnus-no-new-news)
+  ;;         (file . find-file-other-window)
+  ;;         (wl . wl-other-frame))
+  ;;       )
+
   (evil-define-key nil org-capture-mode-map
     [remap evil-save-and-close] #'org-capture-finalize
     [remap evil-save-modified-and-close] #'org-capture-finalize

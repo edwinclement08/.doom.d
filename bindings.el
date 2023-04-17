@@ -1,11 +1,26 @@
 
 (map! :leader
-      :prefix ("r" . "roam")
-      "f" #'org-roam-node-find
-      "i" #'org-roam-node-insert
-      "m" #'org-roam-buffer-toggle
-      "n" #'org-roam-capture
-      "u" #'org-roam-ui-open
+      (:prefix ("r" . "roam")
+               "f" #'org-roam-node-find
+               "i" #'org-roam-node-insert
+               "b" #'org-roam-buffer-toggle
+               "n" #'org-roam-capture
+               "u" #'org-roam-ui-open
+               (:prefix ("F" . "Find via Tag")
+                        "m" #'edwin/org-roam-find-masters
+                        "p" #'edwin/org-roam-find-project
+                        "u" #'edwin/org-roam-find-university
+                        )
+               )
+      )
+
+(map! :leader
+      :prefix ("e" . "edwin")
+      "1" #'edwin-frame-1
+      "2" #'edwin-frame-2
+      "3" #'edwin-frame-3
+      "p" #'edwin-center
+
       )
 
 (map! :leader

@@ -21,8 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Fira Code" :size 24 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 24))
+(setq doom-font (font-spec :family "Fira Code" :size 20 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 20))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-nord)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -73,7 +73,8 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-(add-hook 'window-setup-hook #'toggle-frame-maximized)
+
+;; (add-hook 'window-setup-hook #'toggle-frame-maximized)
 
 (after! (treemacs)
   (setq treemacs-width 27))
@@ -153,3 +154,55 @@
 
 
 (use-package! hyperbole)
+
+(use-package! org-super-agenda
+  :after org-agenda
+  :init
+  (setq org-super-agenda-groups '((:name "Today"
+                                  :time-grid t
+                                  :scheduled today)
+                           (:name "Masters"
+                                  :tag "Masters")
+                           (:name "Due today"
+                            :deadline today)
+                                                      (:name "Important"
+                                  :priority "A")
+                           (:name "Overdue"
+                                  :deadline past)
+                           (:name "Big Outcomes"
+                            :tag "bo"))))
+
+
+(defun edwin-frame-1 ()
+  (interactive)
+   (set-frame-size nil 90 25)
+  )
+
+
+(defun edwin-frame-2 ()
+  (interactive)
+   (set-frame-size nil 126 32)
+  )
+
+(defun edwin-frame-3 ()
+  (interactive)
+   (set-frame-size nil 130 40)
+  )
+
+(defun edwin-frame-4 ()
+  (interactive)
+   (set-frame-size nil 140 45)
+  )
+
+(defun edwin-center ()
+  (interactive)
+  (modify-frame-parameters
+   nil `(
+         (left . 1.0)
+         (top  . 0.5)
+         (user-position . t)
+
+         ))
+  )
+
+

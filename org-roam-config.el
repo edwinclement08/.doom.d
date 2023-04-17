@@ -12,6 +12,9 @@
         ("m" "masters" plain "%?" :target
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+FILETAGS: Masters\n")
          :unnarrowed t)
+        ("p" "project" plain "%?" :target
+         (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+FILETAGS: project\n")
+         :unnarrowed t)
       ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -64,7 +67,7 @@
           ))
   )
 
-(defun ox-hugo/export-all (&optional org-files-root-dir dont-recurse)
+(defun ox-hugo/export-all (&optional org-files-root-dir recurse)
   "Export all Org files (including nested) under ORG-FILES-ROOT-DIR.
 
 All valid post subtrees in all Org files are exported using
@@ -82,7 +85,7 @@ exported.  If this function is called interactively with
 Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
   (interactive)
   (let* ((org-files-root-dir (or org-files-root-dir default-directory))
-         (dont-recurse (or dont-recurse (and current-prefix-arg t)))
+         (dont-recurse (or (not recurse) (and current-prefix-arg t)))
          (search-path (file-name-as-directory (expand-file-name org-files-root-dir)))
          (org-files (if dont-recurse
                         (directory-files search-path :full "\.org$")
@@ -102,3 +105,31 @@ Example usage in Emacs Lisp: (ox-hugo/export-all \"~/org\")."
             (org-hugo-export-wim-to-md :all-subtrees)
             (setq cnt (1+ cnt))))
         (message "Done!")))))
+
+(defadvice org-roam-node-insert (around append-if-in-evil-normal-mode activate compile)
+  "If in evil normal mode and cursor is on a whitespace character, then go into
+         append mode first before inserting the link. This is to put the link after the
+         space rather than before."
+  (let ((is-in-evil-normal-mode (and (bound-and-true-p evil-mode)
+                                     (not (bound-and-true-p evil-insert-state-minor-mode))
+                                     (looking-at "[[:blank:]]"))))
+    (if (not is-in-evil-normal-mode)
+        ad-do-it
+      (evil-append 0)
+      ad-do-it
+      (evil-normal-state))))
+
+(defun edwin/org-roam-find-project ()
+  (interactive)
+  (org-roam-node-find nil (concat "#project "))
+  )
+
+(defun edwin/org-roam-find-masters ()
+  (interactive)
+  (org-roam-node-find nil (concat "#Masters "))
+  )
+
+(defun edwin/org-roam-find-university ()
+  (interactive)
+  (org-roam-node-find nil (concat "#university "))
+  )

@@ -55,3 +55,6 @@
 (package! org-super-agenda)
 
 (package! hyperbole)
+
+(package! mermaid-mode)
+(package! ob-mermaid)

@@ -56,3 +56,15 @@
   "Capture a task."
   (interactive)
   (org-capture nil "t"))
+
+(use-package org-download
+  :after org
+  :bind
+  (:map org-mode-map
+        (
+         ("C-M-S-Y" . org-download-screenshot)
+         )
+  )
+  :custom
+  (org-download-screenshot-method "powershell.exe -Command \"(Get-Clipboard -Format image).Save('$(wslpath -w %s)')\"")
+  )

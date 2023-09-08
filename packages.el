@@ -54,7 +54,7 @@
 (package! org-roam-ui)
 (package! org-super-agenda)
 
-(package! hyperbole)
+;;(package! hyperbole)
 
 (package! mermaid-mode)
 (package! ob-mermaid)

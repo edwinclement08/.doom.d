@@ -153,7 +153,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(use-package! hyperbole)
+;;(use-package! hyperbole)
 
 (use-package! org-super-agenda
   :after org-agenda
@@ -205,4 +205,4 @@
          ))
   )
 
-
+(setq treesit-extra-load-path '("~/.emacs.d-doom/tree-sitter"))

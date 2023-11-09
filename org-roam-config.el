@@ -15,6 +15,9 @@
         ("p" "project" plain "%?" :target
          (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+FILETAGS: project\n")
          :unnarrowed t)
+        ("l" "latex" plain "%?" :target
+         (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+FILETAGS: project\n#+startup: latexpreview\n")
+         :unnarrowed t)
       ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -38,8 +41,6 @@
           org-roam-ui-update-on-save t
 ))
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
 (after! (org ox-hugo)
   (setq org-hugo-base-dir "~/coding/org-hugo-export"))
 

@@ -11,12 +11,17 @@
                          ))
 
 
+(add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+
 (after! (org)
   (setq org-todo-keywords
         '((sequence "TODO(t)" "NOW(n)" "WAITING(w)" "|" "DONE(d)" "CANCELED(c)")))
 (setq org-log-done t)
   (setq org-id-track-globally t)
   (setq org-id-extra-files (directory-files-recursively org-roam-directory "\.org$"))
+
+  (setq org-format-latex-options '(:foreground default :background default :scale 2.5 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
+             ("begin" "$1" "$" "$$" "\\(" "\\[")))
 
   (setq org-link-frame-setup
         '((vm . vm-visit-folder-other-frame)
@@ -29,7 +34,7 @@
   ;; (setq org-link-frame-setup
   ;;       '((vm . vm-visit-folder-other-frame)
   ;;         (vm-imap . vm-visit-imap-folder-other-frame)
-  ;;         (gnus . org-gnus-no-new-news)
+  ;;         (gnus . org-gnus-no-new-newso
   ;;         (file . find-file-other-window)
   ;;         (wl . wl-other-frame))
   ;;       )

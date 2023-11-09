@@ -18,11 +18,10 @@
 ;; - `doom-unicode-font' -- for unicode glyphs
 ;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
 ;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
+;; See 'C-h v doom-font' for documentation and more examples of what they accept. For example:
 ;;
-(setq doom-font (font-spec :family "Fira Code" :size 20 :weight 'semi-light)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 20))
+(setq doom-font (font-spec :family "Fira Code" :size 20 :weight 'Regular)
+      doom-variable-pitch-font (font-spec :family "Barlow" :size 20 :weight 'Thin))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -32,7 +31,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -114,7 +113,7 @@
 
 
 (after! (projectile)
-  (setq projectile-project-search-path '( "~/coding/" ))
+  (setq projectile-project-search-path '( "~/dev_ws/" "~/coding/" "~/university" ))
   )
 
 (after! (treemacs winum)
@@ -206,3 +205,31 @@
   )
 
 (setq treesit-extra-load-path '("~/.emacs.d-doom/tree-sitter"))
+
+(add-to-list 'exec-path "/usr/local/texlive/2023/bin/x86_64-linux")
+
+(map! :map cdlatex-mode-map :i "TAB" #'cdlatex-tab)
+
+(setq-default TeX-master nil)
+
+(with-eval-after-load 'treemacs
+  (defun treemacs-custom-filter (file _)
+    (or
+     (s-ends-with? ".aux" file)
+     (s-ends-with? ".log" file)
+     (s-ends-with? ".pre" file)
+     (s-ends-with? ".fdb_latexmk" file)
+     (s-ends-with? ".fls" file)
+    ))
+  (push #'treemacs-custom-filter treemacs-ignored-file-predicates))
+
+(setq cdlatex-env-alist
+      '(
+        ("bmatrix" "\\begin{bmatrix}\n?\n\\end{bmatrix}\n" nil)
+        ))
+
+
+(setq cdlatex-command-alist
+      '(
+        ("bmat" "Insert Bmatrix"   "" cdlatex-environment ("bmatrix") t nil)
+        ))

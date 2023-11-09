@@ -20,8 +20,16 @@
       "2" #'edwin-frame-2
       "3" #'edwin-frame-3
       "p" #'edwin-center
-
+      "c" (lambda ()
+            (interactive)
+            (org-clear-latex-preview (point-min) (point-max))
+            )
+      "l" (lambda ()
+            (interactive)
+            (org--latex-preview-region (point-min) (point-max))
+            )
       )
+
 
 (map! :leader
       "1" #'winum-select-window-1
